@@ -3,7 +3,7 @@ async function readFile() {
     console.log(data);
 }
 
-readFile();
+await readFile();
 
 // run with
 // deno run --allow-read mod.ts
