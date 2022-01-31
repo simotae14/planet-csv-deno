@@ -34,7 +34,8 @@ async function loadPlanetsData() {
             "koi_srad",
             "kepler_name",
             "koi_count",
-            "koi_steff"
+            "koi_steff",
+            "koi_period"
         ]);
     });
 }
@@ -45,5 +46,15 @@ for (const planet of newEarths) {
     console.log(planet);
 }
 console.log(`${newEarths.length} habitable planets found!`);
+
+// find the planets with less data period
+const [ minPeriod, maxPeriod ] = newEarths.reduce((acc, planet) => {
+    const minValue = Number(planet["koi_period"]) < acc[0] ? Number(planet["koi_period"]) : acc[0];
+    const maxValue = Number(planet["koi_period"]) > acc[1] ? Number(planet["koi_period"]) : acc[1];
+    return [minValue, maxValue];
+}, [Number(newEarths[0]["koi_period"]), Number(newEarths[0]["koi_period"])]);
+
+console.log(`${minPeriod} days was the shortest orbital period found!`);
+console.log(`${maxPeriod} days was the longest orbital period found!`);
 // run with
 // deno run --allow-read mod.ts
